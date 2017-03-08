@@ -35,20 +35,35 @@ function calculateSalesTax(salesData, taxRates) {
   }
 
   for (key in resultsObject) {
-    resultsObject[key].totalSales = calculateTotalSales();
-    resultsObject[key].totalTaxes = calculateTotalTax();
+    resultsObject[key].totalSales = calculateTotalSales(key);
+    resultsObject[key].totalTaxes = calculateTotalTax(salesTaxRates, key);
   }
-    // console.log("Sales data object:", salesData[key].name);
 
-      //return final resultsObject
-      return resultsObject;
+  //return final resultsObject
+  return resultsObject;
 }
 
 //calculate totalSales
-function calculateTotalSales() { return 0;}
+function calculateTotalSales(nameOfCompany) {
+  var sales = 0;
+
+  //loop through companySalesData
+  for (index in companySalesData) {
+    //check to see if you have a match in the company name
+    if (companySalesData[index].name === nameOfCompany) {
+      //add all values in the sales array
+      sales += companySalesData[index].sales.reduce(function (a, b) {
+        return a + b;
+      });
+    }
+  }
+  return sales;
+}
 
 //calculate totalTaxes
-function calculateTotalTax() {return 0;}
+function calculateTotalTax(salesTaxRates, nameOfCompany) {
+  //return salesTaxRates;
+}
 
 var results = calculateSalesTax(companySalesData, salesTaxRates);
 console.log(results);
