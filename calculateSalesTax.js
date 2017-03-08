@@ -24,11 +24,34 @@ var companySalesData = [
 
 
 function calculateSalesTax(salesData, taxRates) {
-  // Implement your code here
+  //create the results obj to be returned
+  var resultsObject = {}
+
+  //iterate through salesData obj
+  for (key in salesData) {
+    //for every key of salesData get the name property
+    // and add it as a key to the results obj
+    resultsObject[salesData[key].name] = {};
+  }
+
+  for (key in resultsObject) {
+    resultsObject[key].totalSales = calculateTotalSales();
+    resultsObject[key].totalTaxes = calculateTotalTax();
+  }
+    // console.log("Sales data object:", salesData[key].name);
+
+      //return final resultsObject
+      return resultsObject;
 }
 
-var results = calculateSalesTax(companySalesData, salesTaxRates);
+//calculate totalSales
+function calculateTotalSales() { return 0;}
 
+//calculate totalTaxes
+function calculateTotalTax() {return 0;}
+
+var results = calculateSalesTax(companySalesData, salesTaxRates);
+console.log(results);
 /* Expected Results:
 {
   Telus: {
